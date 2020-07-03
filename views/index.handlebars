@@ -1,0 +1,31 @@
+<div class="jumbotron-container text-center">
+    <div class="overlay"></div>
+    <div class="jumbtron-text">
+        <h1 class="jumbotron-header text-center">News Scraper</h1>
+        <h5 class="jumbotron-caption text-center">TheBlaze Edition<h5>
+    </div>
+</div>
+
+<div class="articles">
+    {{#each articles}}
+    {{#unless saved}}
+    <div class="article-container">
+        <div class="content-title">
+            <h1><a href="{{this.link}}">{{this.title}}</a></h1>
+        </div>
+        <div class="content-body">
+
+            {{#if this.noArticle}}
+            <div class="content-buttons">
+                <button href='#' class="no-content-button scrape-button">Scrape New Articles</button>
+                <form method="get" action="/saved">
+                    <button type='submit' class="no-content-button">View Saved Articles</button>
+                </form>
+            </div>
+            {{/if}}
+
+        </div>
+    </div>
+    {{/unless}}
+    {{/each}}
+</div>

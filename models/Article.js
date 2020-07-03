@@ -13,10 +13,6 @@ const ArticleSchema = new Schema({
     required: true
   },
 
-  image: {
-    type: String
-  },
-
   saved: {
     type: Boolean,
     required: true

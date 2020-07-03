@@ -1,0 +1,24 @@
+    <div class="jumbotron-container background-image">
+      <div class="overlay"></div>
+      <div class="jumbotron-text">
+        <h1 class="jumbotron-header">Saved Articles</h1>
+      </div>
+    </div>
+
+    <div class="articles">
+  {{#each articles}}
+    {{#if saved}}
+      <div class="article-container">
+        <div class="content-title">
+          <h1><a href="{{this.link}}">{{this.title}}</a></h1> 
+        </div>
+        <div class="content-body">
+          <img src="{{this.image}}" alt="{{this.title}}" class="content-image"> 
+            <div class="content-buttons">
+              <button href="#" class="delete-button" data-id="{{this._id}}">Delete Article</button>
+            </div>
+        </div>
+      </div> 
+    {{/if}}
+  {{/each}}
+</div>

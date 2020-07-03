@@ -3,13 +3,14 @@ const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
 const db = require('../models');
+const { response } = require('express');
 
 router.get('/', (req, res) => {
   db.Article.find({ saved: false }).then(function (articles) {
     console.log(articles);
-    console.log('inside / route find');
+   // console.log('inside / route find');
     if (articles.length > 0) {
-      console('article > 0');
+      //console.log('article > 0');
       let articleObj = {
         articles: articles
       };
@@ -21,7 +22,6 @@ router.get('/', (req, res) => {
           {
             title: 'Sorry, no articles here.',
             link: '',
-            summary: 'Maybe you would like these? ',
             image: '',
             saved: false,
             noArticle: true
@@ -34,23 +34,21 @@ router.get('/', (req, res) => {
 });
 
 router.get('/scrape', (req, res) => {
-  axios.get('https://www.theblaze.com/').then(function (data) {
-    const $ = cheerio.load(data.data);
+  axios.get('https://www.nytimes.com/').then(function (response) {
+    const $ = cheerio.load(response.data);
     const resultsArray = [];
     $('article').each(function (i, element) {
-      let title = $(element).find('h1').find('img').attr('alt');
+      let title = $(element).children().text();
       let link = $(element).find('a').attr('href');
-      let image = $(element).find('a').find('img').attr('src');
 
       resultsArray.push({
         title: title,
         link: link,
-        image: image,
         note: [],
         saved: false
       });
     });
-    db.Article.insertMany(resultsArray, function (err, date) {
+    db.Article.insertMany(resultsArray, function (err, data) {
       if (err) throw err;
       res.json(data);
     });
