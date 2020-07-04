@@ -16,7 +16,7 @@ app.use(express.json());
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-mongoose.connect('mongodb://localhost/newsScraper', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/ArticleSchema', { useNewUrlParser: true });
 
 const routes = require('./controllers/articleController.js');
 app.use(routes);
