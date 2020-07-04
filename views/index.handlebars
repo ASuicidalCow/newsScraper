@@ -7,25 +7,34 @@
 </div>
 
 <div class="articles">
-    {{#each articles}}
+  {{#each articles}}
     {{#unless saved}}
-    <div class="article-container">
+      <div class="article-container">
         <div class="content-title">
-            <h1><a href="{{this.link}}">{{this.title}}</a></h1>
+          <h1><a href="{{this.link}}">{{this.title}}</a></h1> 
         </div>
         <div class="content-body">
-
+          {{#if this.image}}
+            <img src="{{this.image}}" alt="{{this.title}}" class="content-image">
+          {{/if}}
+          <div class="content-summary">
+            <p>{{this.summary}}</p> 
+            {{#unless this.noArticle}}
+              <div class="content-buttons">
+                <button href="#" class="save-button" data-id="{{this._id}}">Save Article</button>
+              </div>
+            {{/unless}}
             {{#if this.noArticle}}
-            <div class="content-buttons">
-                <button href='#' class="no-content-button " id="scrape-button" >Scrape New Articles</button>
+              <div class="content-buttons">
+                <button href="#" class="no-content-button scrape-button">Scrape New Articles</button>
                 <form method="get" action="/saved">
-                    <button type='submit' class="no-content-button">View Saved Articles</button>
+                  <button type="submit" class="no-content-button">View Saved Articles</button>
                 </form>
-            </div>
+              </div>
             {{/if}}
-
+          </div>
         </div>
-    </div>
+      </div> 
     {{/unless}}
-    {{/each}}
+  {{/each}}
 </div>

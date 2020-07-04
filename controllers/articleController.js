@@ -53,12 +53,11 @@ router.get('/saved', (req, res) => {
 });
 
 router.get('/scrape', (req, res) => {
-  axios.get('https://www.nytimes.com/').then(function (response) {
-    const $ = cheerio.load(response.data);
+  axios.get('https://www.nytimes.com/').then(function (data) {
+    const $ = cheerio.load(data.data);
     const resultsArray = [];
-    $('article').each(function (i, element) {
-
-      let title = $(element).children().text();
+    $('article.css-8atqhb').each(function (i, element) {
+      let title = $(element).find('a').attr('alt');
       let link = $(element).find('a').attr('href');
 
       resultsArray.push({

@@ -1,5 +1,3 @@
-
-
 const scrape = document.getElementsByClassName('scrape-button');
 const clear = document.getElementsByClassName('clear-button')[0];
 const saveBtnArray = document.getElementsByClassName('.save-button');
@@ -19,9 +17,10 @@ for (i of deleteBtnArray) {
 
 function scrapeArticles() {
   $.ajax({
-    url: '/scrape',
-    method: 'GET'
+    method: 'GET',
+    url: '/scrape'
   }).then(function (data) {
+    location.reload();
   });
 }
 
