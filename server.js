@@ -21,6 +21,6 @@ mongoose.connect('mongodb://localhost/ArticleSchema', { useNewUrlParser: true })
 const routes = require('./controllers/articleController.js');
 app.use(routes);
 
-app.listen(PORT, function () {
+app.listen(process.env.PORT, function () {
   console.log(`app listening on port: ${PORT}`);
 });
