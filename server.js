@@ -9,7 +9,7 @@ const path = require('path');
 const db = require('./models');
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +22,6 @@ mongoose.connect('mongodb://localhost/ArticleSchema', { useNewUrlParser: true })
 const routes = require('./controllers/articleController.js');
 app.use(routes);
 
-app.listen(process.env.PORT || 8080, function () {
+app.listen(PORT, function () {
   console.log(`app listening on port: ${PORT}`);
 });
