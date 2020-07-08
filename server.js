@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const path = require('path');
 
+
 const db = require('./models');
 
 const app = express();
@@ -21,6 +22,6 @@ mongoose.connect('mongodb://localhost/ArticleSchema', { useNewUrlParser: true })
 const routes = require('./controllers/articleController.js');
 app.use(routes);
 
-app.listen(PORT, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log(`app listening on port: ${PORT}`);
 });
